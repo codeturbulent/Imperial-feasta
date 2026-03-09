@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Imperial Fiesta - Juniors Registration 2025</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+    />
+
+    <style>
+      body {
+        background: linear-gradient(135deg, #6d28d9, #2563eb);
+        font-family: "Poppins", sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      .card {
+        background-color: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(10px);
+        border-radius: 1rem;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        overflow: hidden;
+      }
+      .input-field {
+        border: 1px solid #d1d5db;
+      }
+      .input-field:focus {
+        border-color: #6d28d9;
+        box-shadow: 0 0 0 3px rgba(109, 40, 217, 0.2);
+        outline: none;
+      }
+      .input-field.is-invalid {
+        border-color: #ef4444;
+      }
+      .input-field.is-invalid:focus {
+        box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2);
+      }
+      .error-message {
+        color: #ef4444;
+        font-size: 0.875rem;
+        margin-top: 0.25rem;
+      }
+      .btn-primary {
+        background: linear-gradient(to right, #8b5cf6, #3b82f6);
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      }
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+      }
+      .btn-primary:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+      }
+      .btn-secondary {
+        background-color: #e5e7eb;
+        color: #4b5563;
+      }
+      .stepper {
+        display: flex;
+        justify-content: space-between;
+        position: relative;
+        margin-bottom: 1.5rem;
+      }
+      .stepper::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background-color: #e5e7eb;
+        transform: translateY(-50%);
+        z-index: 1;
+      }
+      .step-item {
+        position: relative;
+        z-index: 2;
+        text-align: center;
+      }
+      .step-circle {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background-color: #e5e7eb;
+        color: #6b7280;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 600;
+        transition: all 0.4s ease;
+      }
+      .step-item.active .step-circle {
+        background-color: #6d28d9;
+        color: white;
+        transform: scale(1.1);
+      }
+      .step-title {
+        font-size: 0.8rem;
+        margin-top: 0.5rem;
+        color: #6b7280;
+        transition: color 0.4s ease;
+      }
+      .step-item.active .step-title {
+        color: #1f2937;
+        font-weight: 600;
+      }
+    </style>
+  </head>
+
+  <body class="min-h-screen flex flex-col items-center p-4">
+    <header class="text-center text-white mb-6">
+      <a href="home.html" class="text-4xl font-bold tracking-tight"
+        >✨ Imperial Fiesta ✨</a
+      >
+      <p class="text-lg mt-2 opacity-90">Juniors Registration - 2025</p>
+    </header>
+
+    <main class="card w-full max-w-2xl">
+      <form id="registerForm" novalidate>
+        <div class="stepper p-6 border-b border-gray-200">
+          <div class="step-item active" data-step="1">
+            <div class="step-circle">1</div>
+            <div class="step-title">Personal Info</div>
+          </div>
+          <div class="step-item" data-step="2">
+            <div class="step-circle">2</div>
+            <div class="step-title">Event Details</div>
+          </div>
+          <div class="step-item" data-step="3">
+            <div class="step-circle"><i class="fas fa-check"></i></div>
+            <div class="step-title">Finish</div>
+          </div>
+        </div>
+
+        <div class="p-8">
+          <!-- Step 1: Personal Info -->
+          <div id="step-1" class="form-step space-y-4">
+            <h3 class="text-xl font-semibold text-gray-800 mb-4">
+              Your Details
+            </h3>
+            <div>
+              <label for="name" class="block font-semibold mb-1 text-gray-700"
+                >Name *</label
+              >
+              <input
+                type="text"
+                id="name"
+                class="w-full border rounded-lg p-3 input-field"
+                placeholder="Enter your full name"
+                required
+              />
+              <div
+                id="name-error"
+                class="error-message hidden"
+                aria-live="polite"
+              ></div>
+            </div>
+            <div>
+              <label for="email" class="block font-semibold mb-1 text-gray-700"
+                >Email *</label
+              >
+              <input
+                type="email"
+                id="email"
+                class="w-full border rounded-lg p-3 input-field"
+                placeholder="your.email@example.com"
+                required
+              />
+              <div
+                id="email-error"
+                class="error-message hidden"
+                aria-live="polite"
+              ></div>
+            </div>
+            <div class="grid md:grid-cols-2 gap-4">
+              <div>
+                <label
+                  for="branch"
+                  class="block font-semibold mb-1 text-gray-700"
+                  >Branch *</label
+                >
+                <select
+                  id="branch"
+                  class="w-full border rounded-lg p-3 input-field"
+                  required
+                >
+                  <option value="" disabled selected>Select Branch</option>
+                  <option>CSE</option>
+                  <option>CE</option>
+                </select>
+                <div
+                  id="branch-error"
+                  class="error-message hidden"
+                  aria-live="polite"
+                ></div>
+              </div>
+              <div>
+                <label
+                  for="mobile"
+                  class="block font-semibold mb-1 text-gray-700"
+                  >Mobile Number *</label
+                >
+                <input
+                  type="tel"
+                  id="mobile"
+                  class="w-full border rounded-lg p-3 input-field"
+                  placeholder="10-digit mobile number"
+                  pattern="[0-9]{10}"
+                  required
+                />
+                <div
+                  id="mobile-error"
+                  class="error-message hidden"
+                  aria-live="polite"
+                ></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 2: Event Preferences -->
+          <div id="step-2" class="form-step space-y-4 hidden">
+            <h3 class="text-xl font-semibold text-gray-800 mb-4">
+              Event Preferences
+            </h3>
+            <fieldset>
+              <legend class="block font-semibold mb-2 text-gray-700">
+                Hobbies (Select all that apply)
+              </legend>
+              <div class="grid grid-cols-2 gap-3" id="hobbies-container">
+                <label class="flex items-center"
+                  ><input
+                    type="checkbox"
+                    name="hobby"
+                    value="Dance"
+                    class="mr-2"
+                  />
+                  Dance</label
+                >
+                <label class="flex items-center"
+                  ><input
+                    type="checkbox"
+                    name="hobby"
+                    value="Singing"
+                    class="mr-2"
+                  />
+                  Singing</label
+                >
+                <label class="flex items-center"
+                  ><input
+                    type="checkbox"
+                    name="hobby"
+                    value="Comedy / Mimicry"
+                    class="mr-2"
+                  />
+                  Comedy / Mimicry</label
+                >
+                <label class="flex items-center"
+                  ><input
+                    type="checkbox"
+                    name="hobby"
+                    value="Poetry / Shayri"
+                    class="mr-2"
+                  />
+                  Poetry / Shayri</label
+                >
+              </div>
+              <div class="mt-3">
+                <input
+                  type="text"
+                  id="hobbies-other"
+                  class="w-full border rounded-lg p-3 input-field"
+                  placeholder="Or specify other hobbies here..."
+                />
+              </div>
+            </fieldset>
+            <div>
+              <label for="game" class="block font-semibold mb-1 text-gray-700"
+                >Game Suggestion for Freshers</label
+              >
+              <textarea
+                id="game"
+                class="w-full border rounded-lg p-3 input-field"
+                placeholder="Suggest games or activities for the event..."
+              ></textarea>
+            </div>
+            <div>
+              <label
+                for="participate"
+                class="block font-semibold mb-1 text-gray-700"
+                >Do you want to Participate in anything? *</label
+              >
+              <select
+                id="participate"
+                class="w-full border rounded-lg p-3 input-field"
+                required
+              >
+                <option value="" disabled selected>Select Option</option>
+                <option>Yes</option>
+                <option>No</option>
+              </select>
+              <div
+                id="participate-error"
+                class="error-message hidden"
+                aria-live="polite"
+              ></div>
+            </div>
+          </div>
+
+          <!-- This step is not shown to the user but is part of the flow -->
+          <div id="step-3" class="form-step text-center hidden"></div>
+
+          <!-- Navigation Buttons -->
+          <div class="mt-6 flex justify-between">
+            <button
+              type="button"
+              id="prevBtn"
+              class="py-2 px-6 rounded-lg btn-secondary hidden"
+            >
+              Previous
+            </button>
+            <button
+              type="button"
+              id="nextBtn"
+              class="py-2 px-8 rounded-lg text-white btn-primary ml-auto"
+            >
+              Next
+            </button>
+          </div>
+        </div>
+      </form>
+    </main>
+
+    <!-- Universal Footer -->
+    <footer
+      class="text-white mt-20 w-full bg-black bg-opacity-20 backdrop-blur-sm border-t border-white border-opacity-10"
+    >
+      <div class="max-w-6xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div>
+            <h3
+              class="text-lg font-semibold tracking-wider uppercase opacity-80"
+            >
+              Imperial Fiesta
+            </h3>
+            <p class="mt-4 text-gray-300 text-sm leading-relaxed">
+              The annual welcome celebration for juniors at Babasaheb Bhimrao
+              Ambedkar University.
+            </p>
+          </div>
+          <div>
+            <h3
+              class="text-lg font-semibold tracking-wider uppercase opacity-80"
+            >
+              Quick Links
+            </h3>
+            <ul class="mt-4 space-y-2">
+              <li>
+                <a
+                  href="home.html"
+                  class="text-gray-300 hover:text-white transition-colors duration-200"
+                  >Home</a
+                >
+              </li>
+              <li>
+                <a
+                  href="about.html"
+                  class="text-gray-300 hover:text-white transition-colors duration-200"
+                  >About Us</a
+                >
+              </li>
+              <li>
+                <a
+                  href="pricing.html"
+                  class="text-gray-300 hover:text-white transition-colors duration-200"
+                  >Pricing</a
+                >
+              </li>
+              <li>
+                <a
+                  href="contact.html"
+                  class="text-gray-300 hover:text-white transition-colors duration-200"
+                  >Contact</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h3
+              class="text-lg font-semibold tracking-wider uppercase opacity-80"
+            >
+              Contact & Location
+            </h3>
+            <ul class="mt-4 space-y-3">
+              <li class="flex items-start">
+                <i
+                  class="fas fa-map-marker-alt flex-shrink-0 h-6 w-6 opacity-70 mt-0.5"
+                ></i>
+                <span class="ml-3 text-sm text-gray-300"
+                  >BBAU, Vidya Vihar, Raebareli Road, Lucknow, UP 226025</span
+                >
+              </li>
+              <li class="flex items-center">
+                <i
+                  class="fas fa-phone-alt flex-shrink-0 h-6 w-6 opacity-70"
+                ></i>
+                <span class="ml-3 text-sm text-gray-300"
+                  >8470924109 (Ashish)</span
+                >
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h3
+              class="text-lg font-semibold tracking-wider uppercase opacity-80"
+            >
+              Follow Us
+            </h3>
+            <p class="mt-4 text-gray-300 text-sm">
+              Stay updated on our college social channels.
+            </p>
+            <div class="flex mt-4 space-x-4">
+              <a
+                href="#"
+                class="w-8 h-8 bg-black bg-opacity-30 rounded-full flex items-center justify-center hover:bg-opacity-50 transition-colors"
+                aria-label="Instagram"
+                ><i class="fab fa-instagram"></i
+              ></a>
+              <a
+                href="#"
+                class="w-8 h-8 bg-black bg-opacity-30 rounded-full flex items-center justify-center hover:bg-opacity-50 transition-colors"
+                aria-label="Facebook"
+                ><i class="fab fa-facebook-f"></i
+              ></a>
+            </div>
+          </div>
+        </div>
+        <div
+          class="mt-12 border-t border-white border-opacity-20 pt-8 flex flex-col sm:flex-row justify-between items-center"
+        >
+          <p class="text-sm text-gray-400">
+            &copy; 2025 Imperial Fiesta. All Rights Reserved.
+          </p>
+          <div class="flex space-x-4 mt-4 sm:mt-0 text-sm">
+            <a
+              href="terms.html"
+              class="text-gray-400 hover:text-white transition-colors"
+              >Terms of Service</a
+            >
+            <a
+              href="privacy.html"
+              class="text-gray-400 hover:text-white transition-colors"
+              >Privacy Policy</a
+            >
+            <a
+              href="refund-policy.html"
+              class="text-gray-400 hover:text-white transition-colors"
+              >Refund Policy</a
+            >
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const form = document.getElementById("registerForm");
+        const formSteps = document.querySelectorAll(".form-step");
+        const stepperItems = document.querySelectorAll(".step-item");
+        const nextBtn = document.getElementById("nextBtn");
+        const prevBtn = document.getElementById("prevBtn");
+
+        let currentStep = 1;
+
+        form.addEventListener("submit", (e) => e.preventDefault());
+
+        const updateStepper = () => {
+          stepperItems.forEach((item) => {
+            const step = parseInt(item.dataset.step);
+            if (step < currentStep) {
+              item.classList.add("active");
+            } else if (step === currentStep) {
+              item.classList.add("active");
+            } else {
+              item.classList.remove("active");
+            }
+          });
+        };
+
+        const showStep = (stepNumber) => {
+          formSteps.forEach((step) => step.classList.add("hidden"));
+          const activeStep = document.getElementById(`step-${stepNumber}`);
+          activeStep.classList.remove("hidden");
+
+          prevBtn.classList.toggle("hidden", stepNumber === 1);
+          nextBtn.classList.toggle("hidden", stepNumber === formSteps.length);
+
+          nextBtn.textContent =
+            stepNumber === 2 ? "Submit & Proceed to Pay" : "Next";
+
+          const firstInput = activeStep.querySelector(
+            "input, select, textarea"
+          );
+          if (firstInput) {
+            firstInput.focus();
+          }
+
+          updateStepper();
+        };
+
+        const showError = (field, message) => {
+          const errorElement = document.getElementById(`${field.id}-error`);
+          field.classList.add("is-invalid");
+          errorElement.textContent = message;
+          errorElement.classList.remove("hidden");
+        };
+
+        const clearError = (field) => {
+          const errorElement = document.getElementById(`${field.id}-error`);
+          field.classList.remove("is-invalid");
+          errorElement.classList.add("hidden");
+        };
+
+        const validateStep = (stepNumber) => {
+          let isValid = true;
+          const currentStepFields = document.querySelectorAll(
+            `#step-${stepNumber} [required]`
+          );
+
+          currentStepFields.forEach((field) => {
+            clearError(field);
+            if (!field.value.trim()) {
+              isValid = false;
+              showError(
+                field,
+                `${field.previousElementSibling.textContent.replace(
+                  " *",
+                  ""
+                )} is required.`
+              );
+            } else if (
+              field.type === "email" &&
+              !/^\S+@\S+\.\S+$/.test(field.value)
+            ) {
+              isValid = false;
+              showError(field, "Please enter a valid email address.");
+            } else if (
+              field.type === "tel" &&
+              !/^[0-9]{10}$/.test(field.value)
+            ) {
+              isValid = false;
+              showError(field, "Please enter a valid 10-digit mobile number.");
+            }
+          });
+          return isValid;
+        };
+
+        prevBtn.addEventListener("click", () => {
+          if (currentStep > 1) {
+            currentStep--;
+            showStep(currentStep);
+          }
+        });
+
+        const handleFormSubmission = async () => {
+          nextBtn.disabled = true;
+          nextBtn.innerHTML =
+            '<i class="fas fa-spinner fa-spin mr-2"></i> Processing...';
+
+          const transactionId = "TXN1740IFF" + Date.now();
+          const checkedHobbies = Array.from(
+            document.querySelectorAll('input[name="hobby"]:checked')
+          ).map((cb) => cb.value);
+          const otherHobby = document
+            .getElementById("hobbies-other")
+            .value.trim();
+          if (otherHobby) checkedHobbies.push(otherHobby);
+
+          const formData = {
+            name: document.getElementById("name").value.trim(),
+            email: document.getElementById("email").value.trim(),
+            branch: document.getElementById("branch").value,
+            mobile: document.getElementById("mobile").value.trim(),
+            hobbies: checkedHobbies,
+            game: document.getElementById("game").value.trim(),
+            participate: document.getElementById("participate").value,
+            txnId: transactionId,
+          };
+
+          try {
+            // --- Step 1: Save registration details to your Vercel/Firestore backend ---
+            const registrationResponse = await fetch(
+              "https://freshers-8fly.vercel.app/api/submit-form",
+              {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(formData),
+              }
+            );
+            if (!registrationResponse.ok)
+              throw new Error(
+                `Registration failed: ${registrationResponse.statusText}`
+              );
+            console.log("Registration data saved successfully.");
+
+            // --- Step 2: If registration is successful, initiate the payment ---
+            const paymentResponse = await fetch(
+              "https://freshers-8fly.vercel.app/api/pay",
+              {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                  mobileNumber: formData.mobile,
+                  merchantTransactionId: formData.txnId,
+                }),
+              }
+            );
+            const paymentResult = await paymentResponse.json();
+
+            // --- Step 3: Redirect the user to the PhonePe payment page ---
+            if (paymentResult.success) {
+              console.log("Redirecting to PhonePe...");
+              window.location.href = paymentResult.paymentUrl;
+            } else {
+              throw new Error(
+                paymentResult.message || "Failed to create payment request."
+              );
+            }
+          } catch (error) {
+            console.error("Submission or Payment failed:", error);
+            alert(
+              `An error occurred: ${error.message}. Please check your connection and try again.`
+            );
+            nextBtn.disabled = false;
+            nextBtn.textContent = "Submit & Proceed to Pay";
+          }
+        };
+
+        nextBtn.addEventListener("click", async () => {
+          if (!validateStep(currentStep)) return;
+          if (currentStep === 2) {
+            await handleFormSubmission();
+          } else {
+            currentStep++;
+            showStep(currentStep);
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

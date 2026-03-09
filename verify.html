@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Payment Verification - Fresher's Party</title>
+    <!-- Tailwind CSS for utility classes -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* Applying base styles and custom gradient from inspiration */
+      body {
+        background: linear-gradient(135deg, #6d28d9, #2563eb);
+        font-family: "Poppins", sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      /* Card styles inspired by the provided example */
+      .card {
+        background-color: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(10px);
+        border-radius: 1.5rem; /* Slightly larger radius */
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      /* Primary button styles from inspiration */
+      .btn-primary {
+        background: linear-gradient(to right, #8b5cf6, #3b82f6);
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-3px); /* Increased hover effect */
+        box-shadow: 0 7px 25px rgba(0, 0, 0, 0.2);
+      }
+
+      /* --- Stepper Styles --- */
+      .stepper-wrapper {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 2.5rem; /* More space */
+      }
+
+      /* This is the background line */
+      .stepper-line {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background-color: #e5e7eb;
+        transform: translateY(-50%);
+        z-index: 1;
+      }
+
+      /* This is the progress line that animates on top of the background line */
+      .stepper-progress {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        height: 2px;
+        background-color: #6d28d9;
+        transform: translateY(-50%);
+        z-index: 2;
+        width: 50%; /* Represents progress to the middle step */
+        transition: width 0.5s ease-in-out;
+      }
+
+      .step-item {
+        position: relative;
+        z-index: 3;
+        text-align: center;
+      }
+
+      .step-circle {
+        width: 40px; /* Larger circles */
+        height: 40px;
+        border-radius: 50%;
+        background-color: #fff;
+        color: #9ca3af;
+        border: 2px solid #e5e7eb;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 600;
+        transition: all 0.4s ease;
+      }
+
+      .step-title {
+        font-size: 0.875rem;
+        margin-top: 0.75rem;
+        color: #6b7280;
+        transition: color 0.4s ease;
+      }
+
+      /* Styles for completed and active steps */
+      .step-item.completed .step-circle {
+        border-color: #6d28d9;
+        background-color: #6d28d9;
+        color: white;
+      }
+
+      .step-item.active .step-circle {
+        border-color: #6d28d9;
+        color: #6d28d9;
+        transform: scale(1.1);
+      }
+
+      .step-item.completed .step-title,
+      .step-item.active .step-title {
+        color: #1f2937;
+        font-weight: 600;
+      }
+    </style>
+  </head>
+  <body class="min-h-screen flex items-center justify-center p-4">
+    <!-- Main Card Container -->
+    <main class="card w-full max-w-lg text-center p-8 md:p-12">
+      <!-- Icon -->
+      <div class="mb-6">
+        <svg
+          class="w-16 h-16 text-violet-500 mx-auto"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"
+          />
+        </svg>
+      </div>
+
+      <!-- Heading -->
+      <h1 class="text-2xl md:text-3xl font-bold text-gray-800 mb-4">
+        We're Verifying Your Payment
+      </h1>
+
+      <!-- Thank You Message -->
+      <p class="text-gray-600 mb-8">
+        Thank you for joining the Fresher's Party! Your payment is currently
+        being processed. This usually takes Some Days.
+      </p>
+
+      <!-- Stepper -->
+      <div class="stepper-wrapper">
+        <div class="stepper-line"></div>
+        <div class="stepper-progress"></div>
+
+        <!-- Step 1: Completed -->
+        <div class="step-item completed">
+          <div class="step-circle">
+            <!-- Checkmark Icon -->
+            <svg
+              class="w-6 h-6"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="2"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M4.5 12.75l6 6 9-13.5"
+              />
+            </svg>
+          </div>
+          <div class="step-title">Initiated</div>
+        </div>
+
+        <!-- Step 2: Active -->
+        <div class="step-item active">
+          <div class="step-circle">2</div>
+          <div class="step-title">Verifying</div>
+        </div>
+
+        <!-- Step 3: Pending -->
+        <div class="step-item">
+          <div class="step-circle">3</div>
+          <div class="step-title">Ticket Sent</div>
+        </div>
+      </div>
+
+      <!-- Informational Text -->
+      <div class="bg-gray-100 p-4 rounded-lg text-sm text-gray-700">
+        <p>
+          If your payment is successful, we will email your ticket to you
+          shortly. If there's an issue, we will notify you via email as well.
+          Please check your inbox (and spam folder!).
+        </p>
+      </div>
+
+      <!-- Home Button -->
+    </main>
+    <footer
+      class="text-white mt-20 w-full bg-black bg-opacity-20 backdrop-blur-sm border-t border-white border-opacity-10"
+    >
+      <div class="max-w-6xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div>
+            <h3
+              class="text-lg font-semibold tracking-wider uppercase opacity-80"
+            >
+              Imperial Fiesta
+            </h3>
+            <p class="mt-4 text-gray-300 text-sm leading-relaxed">
+              The annual welcome celebration for juniors at Babasaheb Bhimrao
+              Ambedkar University, filled with fun, music, and unforgettable
+              memories.
+            </p>
+          </div>
+          <div>
+            <h3
+              class="text-lg font-semibold tracking-wider uppercase opacity-80"
+            >
+              Quick Links
+            </h3>
+            <ul class="mt-4 space-y-2">
+              <li>
+                <a
+                  href="register.html"
+                  class="text-gray-300 hover:text-white transition-colors duration-200"
+                  >Register</a
+                >
+              </li>
+              <li>
+                <a
+                  href="about.html"
+                  class="text-gray-300 hover:text-white transition-colors duration-200"
+                  >About Us</a
+                >
+              </li>
+              <li>
+                <a
+                  href="pricing.html"
+                  class="text-gray-300 hover:text-white transition-colors duration-200"
+                  >Pricing</a
+                >
+              </li>
+              <li>
+                <a
+                  href="contact.html"
+                  class="text-gray-300 hover:text-white transition-colors duration-200"
+                  >Contact</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h3
+              class="text-lg font-semibold tracking-wider uppercase opacity-80"
+            >
+              Contact & Location
+            </h3>
+            <ul class="mt-4 space-y-3">
+              <li class="flex items-start">
+                <i
+                  class="fas fa-map-marker-alt flex-shrink-0 h-6 w-6 opacity-70 mt-0.5"
+                ></i>
+                <span class="ml-3 text-sm text-gray-300"
+                  >Babasaheb Bhimrao Ambedkar University, <br />Vidya Vihar,
+                  Raebareli Road, Lucknow, Uttar Pradesh 226025</span
+                >
+              </li>
+              <li class="flex items-center">
+                <i
+                  class="fas fa-phone-alt flex-shrink-0 h-6 w-6 opacity-70"
+                ></i>
+                <span class="ml-3 text-sm text-gray-300"
+                  >8470924109 (Ashish)</span
+                ><span class="ml-3 text-sm text-gray-300"
+                  >codeturbulent@gmail.com (Ashish)</span
+                >
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h3
+              class="text-lg font-semibold tracking-wider uppercase opacity-80"
+            >
+              Follow Us
+            </h3>
+            <p class="mt-4 text-gray-300 text-sm">
+              Stay updated on our college social channels.
+            </p>
+            <div class="flex mt-4 space-x-4">
+              <a
+                href="#"
+                class="w-8 h-8 bg-black bg-opacity-30 rounded-full flex items-center justify-center hover:bg-opacity-50 transition-colors"
+                aria-label="Instagram"
+                ><i class="fab fa-instagram"></i
+              ></a>
+              <a
+                href="#"
+                class="w-8 h-8 bg-black bg-opacity-30 rounded-full flex items-center justify-center hover:bg-opacity-50 transition-colors"
+                aria-label="Facebook"
+                ><i class="fab fa-facebook-f"></i
+              ></a>
+            </div>
+          </div>
+        </div>
+        <div
+          class="mt-12 border-t border-white border-opacity-20 pt-8 flex flex-col sm:flex-row justify-between items-center"
+        >
+          <p class="text-sm text-gray-400">
+            &copy; 2025 Imperial Fiesta. All Rights Reserved.
+          </p>
+          <div class="flex space-x-4 mt-4 sm:mt-0 text-sm">
+            <a
+              href="terms.html"
+              class="text-gray-400 hover:text-white transition-colors"
+              >Terms of Service</a
+            >
+            <a
+              href="privacy.html"
+              class="text-gray-400 hover:text-white transition-colors"
+              >Privacy Policy</a
+            >
+            <a
+              href="refund-policy.html"
+              class="text-gray-400 hover:text-white transition-colors"
+              >Refund Policy</a
+            >
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
