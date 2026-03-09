@@ -97,7 +97,7 @@
 
 - **Event Lead:** Ashish Goyal
 - **Design & Creative:** Aryan Sengar
-- **Development:** [Your Name/Team]
+- **Development:** Codeturbulent
 
 ---
 
