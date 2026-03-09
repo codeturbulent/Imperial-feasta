@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Your Imperial Fiesta Ticket</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="shortcut icon"
+      href="https://png.pngtree.com/png-vector/20241211/ourmid/pngtree-cute-yellow-cartoon-star-clipart-illustration-png-image_14714901.png"
+      type="image/x-icon"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+    />
+    <script src="
+https://cdn.jsdelivr.net/npm/qr-code-styling@1.9.2/lib/qr-code-styling.min.js
+"></script>
+    <style>
+      body {
+        background: #1a1a2e; /* Dark indigo background */
+        font-family: "Poppins", sans-serif;
+        color: #e5e7eb; /* Light gray text for readability */
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        display: flex; /* Center the ticket */
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        padding: 1rem;
+      }
+
+      /* Custom utility classes */
+      .font-cinzel {
+        font-family: "Cinzel", serif;
+      }
+      .text-gold {
+        color: #fde047; /* Brighter gold/yellow for titles */
+      }
+      .text-light-gold {
+        color: #fcd34d; /* Slightly softer gold for text */
+      }
+
+      .ticket-card {
+        background-color: rgba(
+          26,
+          26,
+          46,
+          0.4
+        ); /* Slightly lighter dark indigo for the card */
+        backdrop-filter: blur(10px);
+        border-radius: 1rem;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        border: 2px solid #facc15; /* Gold border */
+        width: 100%;
+        max-width: 450px; /* Max width for a ticket */
+        padding: 1.5rem; /* Increased padding for a more substantial look */
+        text-align: center;
+        position: relative;
+        overflow: hidden; /* For the divider effects */
+      }
+
+      .ticket-divider {
+        border-bottom: 2px dashed #facc15; /* Gold dashed line */
+        margin: 2rem 0; /* Space above and below */
+      }
+
+      .qr-code-section {
+        background-color: rgba(0, 0, 0, 0.2);
+        padding: 1rem;
+        border-radius: 0.75rem;
+        border: 1px solid rgba(250, 204, 21, 0.2);
+      }
+
+      .qr-code-placeholder {
+        padding: 0;
+        width: 280px;
+        height: 280px;
+        background-color: #374151; /* Dark gray for placeholder */
+        margin: 0 auto 01rem auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #9ca3af;
+        font-size: 0.875rem;
+        border-radius: 0.5rem;
+        border: 1px dashed #fde047;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="ticket-card">
+      <h1 class="text-4xl font-bold text-gold font-cinzel mb-2">
+        Imperial Fiesta
+      </h1>
+      <p class="text-lg text-gray-300 mb-6">Juniors Welcome - 2025</p>
+
+      <div class="mb-6">
+        <p class="text-2xl text-light-gold mb-2">Welcome,</p>
+        <p class="text-4xl font-bold text-gold font-cinzel" id="attendiename">
+          -----------
+        </p>
+      </div>
+
+      <div class="ticket-divider"></div>
+
+      <div class="qr-code-section">
+        <p class="text-md text-gray-300 mb-4">
+          Your unique pass to the celebration:
+        </p>
+        <div class="qr-code-placeholder">
+          <img
+            id="attendeeqr"
+            src="qrloading.gif"
+            alt="QR Code"
+            class="w-full h-full object-contain rounded-md"
+          />
+        </div>
+        <p class="text-sm text-gray-400">
+          Please present this QR code at entry.
+        </p>
+      </div>
+
+      <div class="mt-8 text-sm text-gray-400">
+        <p>Date: November 23, 2025</p>
+        <p>
+          Venue : B.S. Celebration Banquets & Lawn, Banquet Hall 1 in Bijnor
+          Road Lucknow
+        </p>
+      </div>
+    </div>
+  </body>
+  <script>
+    const queryString = window.location.search;
+
+    // 1. Create a URLSearchParams object
+    const urlParams = new URLSearchParams(queryString);
+
+    const uid = urlParams.get("uid");
+
+    async function getTicketData() {
+      try {
+        const url = `https://freshers-8fly.vercel.app/api/ticketgen?txnId=${uid}`;
+
+        const response = await fetch(url);
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        return data;
+      } catch (error) {
+        console.error("Fetch error:", error);
+      }
+    }
+    async function init() {
+      let userdata = await getTicketData();
+      document.getElementById("attendiename").innerHTML = userdata.name;
+      createqr(userdata);
+    }
+
+    init();
+
+    function createqr(userdata) {
+      var qrdata = {
+        name: userdata.name,
+        mobile: userdata.mobile,
+        email: userdata.email,
+        trxnid: userdata.txnId,
+      };
+
+      const qrCode = new QRCodeStyling({
+        width: 300,
+        height: 300,
+        type: "svg",
+        data: JSON.stringify(qrdata), // Or whatever data you need
+
+        // --- Theme Changes ---
+
+        dotsOptions: {
+          // Uses .text-gold (#fde047) to match the main page title
+          color: "#fde047",
+          type: "rounded",
+        },
+        backgroundOptions: {
+          // Set to transparent to blend with your dark page background (#1a1a2e)
+          color: "transparent",
+        },
+        imageOptions: {
+          crossOrigin: "anonymous",
+          margin: 20,
+        },
+        cornersSquareOptions: {
+          type: "extra-rounded",
+          // Uses .text-accent-gold (#facc15) to match card borders & icons
+          color: "#facc15",
+        },
+        cornersDotOptions: {
+          type: "rounded",
+          // Matches the corner squares
+          color: "#facc15",
+        },
+      });
+
+      qrCode.getRawData("png").then((blob) => {
+        // Create a local URL for the blob data
+        const url = URL.createObjectURL(blob);
+
+        // Set this new URL as the image source
+        document.getElementById("attendeeqr").src = url;
+      });
+    }
+  </script>
+</html>

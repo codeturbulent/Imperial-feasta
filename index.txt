@@ -11,18 +11,13 @@
       href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Poppins:wght@400;600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link
-      rel="shortcut icon"
-      href="https://png.pngtree.com/png-vector/20241211/ourmid/pngtree-cute-yellow-cartoon-star-clipart-illustration-png-image_14714901.png"
-      type="image/x-icon"
-    />
+    <link rel="shortcut icon" href="https://png.pngtree.com/png-vector/20241211/ourmid/pngtree-cute-yellow-cartoon-star-clipart-illustration-png-image_14714901.png" type="image/x-icon">
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
     />
     <style>
       body {
-        /* Dark purple/indigo background from poster */
         background: #1a1a2e;
         font-family: "Poppins", sans-serif;
         -webkit-font-smoothing: antialiased;
@@ -32,13 +27,12 @@
         font-family: "Cinzel", serif;
       }
       .text-gold {
-        color: #fde047; /* Brighter gold/yellow for titles */
+        color: #fde047;
       }
       .text-accent-gold {
-        color: #facc15; /* Tailwind yellow-400 for accents */
+        color: #facc15;
       }
       .card {
-        /* Darker card with gold border, matching poster's boxes */
         background-color: rgba(0, 0, 0, 0.2);
         backdrop-filter: blur(10px);
         border-radius: 1rem;
@@ -46,9 +40,8 @@
         border: 2px solid #facc15;
       }
       .btn-primary {
-        /* Gold button */
         background: linear-gradient(to right, #facc15, #eab308);
-        color: #1e1b4b; /* Dark text on gold button */
+        color: #1e1b4b;
         transition: all 0.3s ease;
         box-shadow: 0 4px 15px rgba(250, 204, 21, 0.2);
       }
@@ -94,10 +87,9 @@
             >Contact</a
           >
         </div>
-        <a
-          href="register.html"
-          class="btn-primary py-2 px-6 rounded-lg font-semibold"
-          >X Register Over X</a
+        <span
+          class="py-2 px-6 rounded-lg font-semibold bg-gray-500 text-white cursor-not-allowed"
+          >Registration Closed</span
         >
       </nav>
     </header>
@@ -112,7 +104,9 @@
           >
             ★ A NEW BEGINNING, A NEW BOND ★
           </p>
-          <h1 class="font-cinzel text-6xl md:text-8xl font-bold my-4 text-gold">
+          <h1
+            class="font-cinzel text-6xl md:text-8xl font-bold my-4 text-gold"
+          >
             IMPERIAL FIESTA 2025
           </h1>
           <p class="mt-4 text-lg md:text-xl text-gray-300 max-w-2xl mx-auto">
@@ -121,9 +115,7 @@
           <p class="text-md text-gray-400">(UIET, BBAU LUCKNOW)</p>
           <p class="text-md text-gray-400">(Ashish Goyal - 8470924109)</p>
           <p class="text-md text-gray-400">(Himanshu Yadav - 8005001105)</p>
-          <p class="text-md text-gray-400">
-            (Preksha Jha - +977 980-8991729 (Whatsapp))
-          </p>
+          <p class="text-md text-gray-400">(Preksha Jha - +977 980-8991729 (Whatsapp))</p>
 
           <div
             class="grid grid-cols-1 md:grid-cols-3 gap-6 text-left mt-12 text-lg"
@@ -143,27 +135,24 @@
                 <span>10:30 AM TO 05:00 PM</span>
               </div>
             </div>
-            <a
-              href="https://maps.app.goo.gl/kEJyt1HXvSCvhX4T9"
-              style="display: block"
+<a href="https://maps.app.goo.gl/kEJyt1HXvSCvhX4T9" style="display: block;">
+            <div
+              class="border-2 border-accent-gold p-6 rounded-lg bg-black bg-opacity-20"
             >
-              <div
-                class="border-2 border-accent-gold p-6 rounded-lg bg-black bg-opacity-20"
-              >
-                <h3 class="text-accent-gold text-xl font-bold mb-3 uppercase">
-                  Venue
-                </h3>
-                <div class="flex items-start gap-3">
-                  <i
-                    class="fas fa-map-marker-alt w-5 text-center opacity-80 pt-1"
-                  ></i>
-                  <span
-                    >B.S. Celebration Banquets & Lawn, Banquet Hall 1 in Bijnor
-                    Road Lucknow</span
-                  >
-                </div>
+              <h3 class="text-accent-gold text-xl font-bold mb-3 uppercase">
+                Venue
+              </h3>
+              <div class="flex items-start gap-3">
+                <i
+                  class="fas fa-map-marker-alt w-5 text-center opacity-80 pt-1"
+                ></i>
+                <span
+                  >B.S. Celebration Banquets & Lawn, Banquet Hall 1 in Bijnor
+                  Road Lucknow</span
+                >
               </div>
-            </a>
+            </div>
+</a>
             <div
               class="border-2 border-accent-gold p-6 rounded-lg bg-black bg-opacity-20"
             >
@@ -181,12 +170,10 @@
             </div>
           </div>
 
-          <a
-            href="register.html"
-            class="mt-12 inline-block btn-primary text-xl py-4 px-12 rounded-lg font-bold"
-          >
-            X You are late X
-          </a>
+          <!-- Registration button removed -->
+          <p class="mt-12 text-2xl text-red-400 font-bold">
+            🚫 Registration is now closed.
+          </p>
         </div>
       </section>
       <section class="py-20 px-4 bg-black bg-opacity-20 backdrop-blur-sm">
@@ -221,25 +208,25 @@
           <h2 class="text-4xl font-bold mb-12 text-gold">
             Glimpses From The Past
           </h2>
-          <div class="grid grid-cols-2 md:grid-cols-4 gap-4" id="heroimg"></div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4" id="heroimg"></div>
           <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
             <img
-              src="images/sub (1).jpeg"
+             src="images/sub (1).jpeg"
               alt="Party scene 1"
               class="rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300"
             />
             <img
-              src="images/sub (2).jpeg"
+             src="images/sub (2).jpeg"
               alt="Party scene 2"
               class="rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300"
             />
             <img
-              src="images/sub (3).jpeg"
+             src="images/sub (3).jpeg"
               alt="Party scene 3"
               class="rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300"
             />
             <img
-              src="images/sub (4).jpeg"
+             src="images/sub (4).jpeg"
               alt="Party scene 4"
               class="rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300"
             />
@@ -255,15 +242,13 @@
             </h2>
             <p class="mt-4 text-lg text-gray-200 max-w-xl mx-auto">
               This is your chance to make new friends, create lasting memories,
-              and kickstart your university journey with a bang. Get your pass
-              today!
+              and kickstart your university journey with a bang.
             </p>
-            <a
-              href="register.html"
-              class="mt-8 inline-block btn-primary text-lg py-3 px-10 rounded-lg font-bold"
+            <span
+              class="mt-8 inline-block bg-gray-500 text-white text-lg py-3 px-10 rounded-lg font-bold cursor-not-allowed"
             >
-              Register for ₹250
-            </a>
+              Registration Closed
+            </span>
           </div>
         </div>
       </section>

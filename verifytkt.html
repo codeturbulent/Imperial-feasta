@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Imperial Fiesta Ticket</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&display=swap" rel="stylesheet" />
+
+  <link rel="shortcut icon"
+    href="https://png.pngtree.com/png-vector/20241211/ourmid/pngtree-cute-yellow-cartoon-star-clipart-illustration-png-image_14714901.png"
+    type="image/x-icon" />
+
+  <style>
+    body {
+      background: #1a1a2e;
+      font-family: "Poppins", sans-serif;
+      color: #e5e7eb;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 0.5rem;
+    }
+
+    .font-cinzel {
+      font-family: "Cinzel", serif;
+    }
+
+    .text-gold {
+      color: #fde047;
+    }
+
+    .ticket-card {
+      background-color: rgba(26, 26, 46, 0.4);
+      backdrop-filter: blur(10px);
+      border-radius: 1rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      border: 2px solid #facc15;
+      width: 100%;
+      max-width: 450px;
+      padding: 1.5rem;
+      text-align: center;
+      position: relative;
+    }
+
+    .qr-code-section {
+      background-color: rgba(0, 0, 0, 0.2);
+      padding: 0.2rem;
+      border-radius: 0.75rem;
+      border: 1px solid rgba(250, 204, 21, 0.2);
+    }
+
+    .qr-code-placeholder {
+      width: 320px;
+      height: 320px;
+      background-color: #374151;
+      margin: 1rem auto;
+      border-radius: 0.5rem;
+      border: 1px dashed #fde047;
+      position: relative;
+      overflow: hidden;
+      /* keep video inside */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Keep aspect ratio but fill nicely */
+    #maincam {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Camera switch button */
+    #switchBtn {
+      position: absolute;
+      bottom: 8px;
+      right: 8px;
+      padding: 6px 12px;
+      font-size: 12px;
+      background: rgba(0, 0, 0, 0.6);
+      color: white;
+      border-radius: 50px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(4px);
+      z-index: 20;
+    }
+
+    #overlay {
+      position: absolute;
+      z-index: 1;
+    }
+
+    .alert-box {
+      background-color: rgba(26, 26, 46, 0.5);
+      backdrop-filter: blur(10px);
+      border-radius: 0.75rem;
+      padding: 1rem;
+      margin-top: 1rem;
+      border: 2px solid;
+      box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.4);
+      animation: fadeIn 0.3s ease;
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Border + Glow Colors */
+    .alert-success {
+      border-color: #22c55e;
+      box-shadow: 0 0 18px rgba(34, 197, 94, 0.5);
+    }
+
+    .alert-warning {
+      border-color: #facc15;
+      box-shadow: 0 0 18px rgba(250, 204, 21, 0.5);
+    }
+
+    .alert-danger {
+      border-color: #ef4444;
+      box-shadow: 0 0 18px rgba(239, 68, 68, 0.5);
+    }
+
+    /* Done Button */
+    .alert-done-btn {
+      margin-top: 10px;
+      background: rgba(0, 0, 0, 0.6);
+      color: white;
+      padding: 6px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      font-size: 13px;
+      backdrop-filter: blur(5px);
+      transition: 0.2s ease;
+    }
+
+    .alert-done-btn:hover {
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    /* Fade Animation */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(5px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Fade out animation */
+    @keyframes fadeOut {
+      from {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      to {
+        opacity: 0;
+        transform: translateY(5px);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="overlay">
+
+  </div>
+  </div>
+  <div class="ticket-card">
+    <h1 class="text-4xl font-bold text-gold font-cinzel mb-2">
+      Ticket Verification
+    </h1>
+    <p class="text-lg text-gray-300 mb-6">Juniors Welcome - 2025</p>
+
+    <div class="qr-code-section">
+      <div class="qr-code-placeholder">
+        <video id="maincam" autoplay playsinline></video>
+
+        <!-- switch button added -->
+        <button id="switchBtn">Switch</button>
+      </div>
+    </div>
+
+    <div class="mt-8 text-sm text-gray-400">
+      <p>Date: November 23, 2025</p>
+      <p>
+        Venue : B.S. Celebration Banquets & Lawn, Banquet Hall 1 in Bijnor
+        Road Lucknow
+      </p>
+    </div>
+  </div>
+
+  <script type="module">
+    import QrScanner from "https://unpkg.com/qr-scanner@1.4.2/qr-scanner.min.js";
+    const overlayaccess = document.getElementById("overlay");
+    const video = document.getElementById("maincam");
+    const switchBtn = document.getElementById("switchBtn");
+    let qrScanner = null;
+    let cameras = [];
+    let currentIndex = 0;
+    let stream = null;
+
+    async function loadCameras() {
+      const devices = await navigator.mediaDevices.enumerateDevices();
+      cameras = devices.filter((d) => d.kind === "videoinput");
+    }
+
+    async function startCamera(deviceId = null) {
+      if (stream) {
+        stream.getTracks().forEach((t) => t.stop());
+      }
+
+      const constraints = {
+        video: deviceId
+          ? { deviceId: { exact: deviceId } }
+          : { facingMode: "environment" },
+      };
+
+      try {
+        stream = await navigator.mediaDevices.getUserMedia(constraints);
+        video.srcObject = stream;
+      } catch (err) {
+        alert("Camera error. Please allow permission & use HTTPS.");
+        console.error(err);
+      }
+    }
+
+    // Switch camera
+    switchBtn.addEventListener("click", async () => {
+      if (cameras.length <= 1) {
+        alert("Only one camera available.");
+        return;
+      }
+
+      currentIndex = (currentIndex + 1) % cameras.length;
+      await startCamera(cameras[currentIndex].deviceId);
+      startqrscan();
+    });
+    function startqrscan() {
+      if (qrScanner) {
+        qrScanner = null;
+      }
+      console.log("Qr Started");
+      qrScanner = new QrScanner(
+        video,
+        (result) => {
+          qrresult(result);
+          qrScanner.stop();
+
+        },
+        {
+          highlightScanRegion: true,
+          highlightCodeOutline: true,
+          returnDetailedScanResult: true,
+        }
+      );
+
+      qrScanner.start(); // <-- REQUIRED
+      console.log(qrScanner);
+
+    }
+   
+
+
+    function showverification(type, data) {
+      if (type == "allowed") {
+        overlayaccess.innerHTML = `      <div class="alert-success alert-box">
+        <strong class="text-green-300 text-lg">Welcome,</strong>
+        <strong class="text-green-300 text-lg">${data["name"]}</strong>
+        <p class="text-gray-200 text-sm mt-1">
+          Welcome to the Imperial Fiesta!
+        </p>
+
+        <button class="alert-done-btn" onclick="closepopup(this)">Done</button>`;
+      } else if (type == "alreadydone") {
+        overlayaccess.innerHTML = `   <div class="alert-warning alert-box">
+          <strong class="text-yellow-300 text-lg">${data["name"]}</strong>
+
+  <strong class="text-yellow-300 text-lg">Already Joined</strong>
+  <p class="text-gray-200 text-sm mt-1">This guest has already entered.</p>
+
+  <button class="alert-done-btn" onclick="closepopup(this)">Done</button>
+</div>
+`;
+      } else {
+        overlayaccess.innerHTML = `    <div class="alert-danger alert-box">
+  <strong class="text-red-300 text-lg">Entry Not Allowed</strong>
+  <p class="text-gray-200 text-sm mt-1">
+    This ticket is invalid or unauthorized.
+  </p>
+
+  <button class="alert-done-btn" onclick="closepopup(this)">Done</button>
+</div>`;
+      }
+    }
+   function closepopup(btn) {
+      const alertBox = btn.parentElement;
+      alertBox.style.animation = "fadeOut 0.25s forwards";
+      document.querySelector("body > div.ticket-card > div.qr-code-section > div > div > svg.code-outline-highlight").remove();
+
+      setTimeout(() => {
+        alertBox.remove();
+      }, 250);
+      startqrscan();
+    }
+    window.closepopup = closepopup
+
+
+   
+    async function qrresult(data) {
+      
+    const result = data["data"];
+      // const result = `{"name":"Rohan kumar srivastava","mobile":"8092660919","email":"rohankumarsrivastava09@gmail.com","trxnid":"TXN1740IFF1762794630817"}`;
+      const jsonresult = JSON.parse(result);
+
+      try {
+        const response = await fetch(
+          `https://freshers-8fly.vercel.app/api/verifytkt.js?txnId=${jsonresult["trxnid"]}`
+        );
+        if (!response.ok) {
+          throw new Error(`Response status: ${response.status}`);
+        }
+
+        const result = await response.json();
+
+        if (result["success"]) {
+          showverification(result["entry"], result);
+        }
+        else {
+          showverification(result["entry"], result);
+        }
+      } catch (error) {
+        console.error(error.message);
+      }
+    }
+    // Initialize
+    (async () => {
+      await loadCameras();
+      await startCamera();
+      startqrscan();
+    })();
+  </script>
+  <script>
+     
+  </script>
+  
+</body>
+
+</html>
